@@ -5,7 +5,7 @@ set -euo pipefail
 
 # Mention the versions of Python to be installed. Add versions as space seperated
 # strings
-PYTHON_VERSIONS=(3.6 3.7 3.8 3.9)
+PYTHON_VERSIONS=(3.7 3.8 3.9 3.10)
 
 
 # Update the package-list and install the prerequisites.
