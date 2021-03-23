@@ -63,7 +63,7 @@ gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/k
 ### 🧠 JetBrains Mono
 
 ```
-$ curl -OJL https://download.jetbrains.com/fonts/JetBrainsMono-2.001.zip
+$ curl -OJL https://download.jetbrains.com/fonts/JetBrainsMono-2.225.zip
 $ unzip ./JetBrainsMono-2.001.zip -d /usr/share/fonts
 $ fc-cache -f -v
 ```
