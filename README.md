@@ -31,30 +31,22 @@
 
 * Put all the database `*.pem` keys in the `~/.ssh` folder.
 
-## 🐟 Install Fish (From Bash / Zsh)
+## Transfer Bashrc
 
-* Install:
-
+* Change shell to Bash if set something else:
     ```
-    sudo apt install fish
+    sudo chsh -s $(which bash)
     ```
-
-* Change shell:
-
+* Overwrite `.bashrc`.
     ```
-    sudo chsh -s $(which fish)
+    cp .bashrc ~/.bashrc
     ```
 
-* Copy the config (theme: *Pythonista custom*):
 
-    ```
-    cp -r ~/code/personal/dotfiles/fish ~/.config
-    ```
-    
 ## Ctrl+Tab & Ctrl+Shift+Tab to Switch Between Gnome Terminal Tabs
 
 ```
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab' && 
+gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab' &&
 gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
 ```
 
