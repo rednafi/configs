@@ -9,26 +9,22 @@
 # Bash strict mode
 set -euo pipefail
 
+echo 'python celery' | xargs -n 1 sudo pkill -ecfi
+
 # Run the django server
 djrs="source .venv/bin/activate &&\
 python manage.py runserver"
 
 # Spawn the default queue
 djq1="source .venv/bin/activate &&\
-watchmedo auto-restart --directory=./ --pattern='*.py' \
---ignore-patterns='./.venv/*; ./*/migrations/*' --recursive -- \
 celery -A main worker -Q default -n default --loglevel=INFO --concurrency=1"
 
 # Spawn the identifiers queue
 djq2="source .venv/bin/activate &&\
-watchmedo auto-restart --directory=./ --pattern='*.py'\
---ignore-patterns='./.venv/*; ./*/migrations/*' --recursive -- \
 celery -A main worker -Q identifiers  -n identifiers --loglevel=INFO --concurrency=1"
 
 # Spawn the reports queue
 djq3="source .venv/bin/activate &&\
-watchmedo auto-restart --directory=./ --pattern='*.py' \
---ignore-patterns='./.venv/*; ./*/migrations/*' --recursive -- \
 celery -A main worker -Q reports -n reports --loglevel=INFO --concurrency=1"
 
 # # Spawn the bop orders queue
