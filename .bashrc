@@ -1,8 +1,8 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+#   ┌┐ ┌─┐┌─┐┬ ┬┬─┐┌─┐
+#   ├┴┐├─┤└─┐├─┤├┬┘│
+#   └─┘┴ ┴└─┘┴ ┴┴└─└─┘
 
-# If not running interactively, don't do anything
+# If not running interactively, don't do anything.
 case $- in
 *i*) ;;
 *) return ;;
@@ -10,17 +10,17 @@ esac
 
 # Don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options.
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:erasedups
 
 # Append to the history file, don't overwrite it.
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1).
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1).
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
+# Check the window size after each command and, if necessary, update the
+# values of LINES and COLUMNS.
 shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
@@ -30,12 +30,12 @@ shopt -s checkwinsize
 # Make less more friendly for non-text input files, see lesspipe(1).
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
+# Set variable identifying the chroot you work in (used in the prompt below).
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
+# Set a fancy prompt (non-color, unless we know we "want" color).
 case "$TERM" in
 xterm-color | *-256color) color_prompt=yes ;;
 esac
@@ -57,13 +57,18 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1="\n${debian_chroot:+($debian_chroot)}\[\033[00;33m\]\u@\h\[\033[00m\]:\[\033[00;36m\]\w\[\033[00m\] \n$ "
+    PS1="${debian_chroot:+($debian_chroot)}\[\033[00;33m\]\u@\h\[\033[00m\]:\[\033[00;36m\]\w\[\033[00m\] \n$ "
 else
-    PS1="\n${debian_chroot:+($debian_chroot)}\u@\h:\w \n$ "
+    PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w \n$ "
 fi
+
+# Save and reload the history after each command finishes. Also, add an empty line
+# after each command.
+PROMPT_COMMAND="printf '\n' && history -a && history -c && history -r; $PROMPT_COMMAND"
+
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
+# If this is an xterm set the title to user@host:dir.
 case "$TERM" in
 xterm* | rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
@@ -77,7 +82,7 @@ esac
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
-# You may want to put all your additions into a separate file like
+# You may want to put all your additions into a separate file like—
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
@@ -95,7 +100,6 @@ if ! shopt -oq posix; then
         . /etc/bash_completion
     fi
 fi
-
 
 ##############################################
 # ALIASES
@@ -121,7 +125,6 @@ fi
 alias gp="git push origin HEAD"
 alias brclr="git branch | grep -Ev 'master|staging' | xargs -I{} git branch -D '{}'"
 
-
 ## Unix magics
 alias ll="ls -alF"
 alias la="ls -A"
@@ -138,13 +141,11 @@ alias pkill="pkill -ecfi"
 alias update="sudo apt update && sudo apt upgrade && sudo apt autoclean && sudo apt autoremove"
 alias www="python3 -m http.server 8001"
 
-
 # Work.
 alias dj_dendi="curl -s https://raw.githubusercontent.com/rednafi/dotfiles/master/scripts/dj_dendi.sh | bash"
 
-
 # Docker
-start_redis(){
+start_redis() {
     echo "Spinning up a Redis container..."
     echo "================================"
     echo
@@ -153,28 +154,28 @@ start_redis(){
     echo
 }
 
-stop_redis(){
+stop_redis() {
     echo
     command docker stop dev-redis
     command docker rm dev-redis
     echo
 }
 
-start_rabbit(){
+start_rabbit() {
     echo "Spinning up a Rabbitmq container..."
     echo "==================================="
     echo
     stop_rabbit
-    command docker run -d                       \
-            --hostname my-rabbit                \
-            --name dev-rabbit                   \
-            -p 15672:15672                      \
-            -p 5672:5672                        \
-            --memory 512m                       \
-            -e RABBITMQ_DEFAULT_USER=ubuntu     \
-            -e RABBITMQ_DEFAULT_PASS=debian     \
-            -e RABBITMQ_VM_MEMORY_HIGH_WATERMARK=0.8 \
-            rabbitmq:3-management
+    command docker run -d \
+        --hostname my-rabbit \
+        --name dev-rabbit \
+        -p 15672:15672 \
+        -p 5672:5672 \
+        --memory 512m \
+        -e RABBITMQ_DEFAULT_USER=ubuntu \
+        -e RABBITMQ_DEFAULT_PASS=debian \
+        -e RABBITMQ_VM_MEMORY_HIGH_WATERMARK=0.8 \
+        rabbitmq:3-management
     echo
 }
 
