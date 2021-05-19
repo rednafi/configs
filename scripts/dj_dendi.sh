@@ -45,7 +45,6 @@ proj() {
     gnome-terminal --tab --title="CeleryQ: default" -- bash -ic "$djq1;$SHELL"
     gnome-terminal --tab --title="CeleryQ: identifiers" -- bash -ic "$djq2;$SHELL"
     gnome-terminal --tab --title="CeleryQ: reports" -- bash -ic "$djq3;$SHELL"
-    gnome-terminal --tab --title="CeleryQ: bop_orders" -- bash -ic "$djq4;$SHELL"
 }
 
 proj
