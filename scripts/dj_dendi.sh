@@ -9,7 +9,10 @@
 # Bash strict mode
 set -euo pipefail
 
-echo 'python celery' | xargs -n 1 sudo pkill -ecfi
+echo 'python celery' | xargs -n 1 sudo pkill -ecfi && \
+docker stop dev-redis && \
+docker rm dev-redis && \
+docker run --name dev-redis -d -h localhost -p 6379:6379 redis:alpine
 
 # Run the django server
 djrs="source .venv/bin/activate &&\
