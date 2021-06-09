@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth:erasedups
 shopt -s histappend
 
 # For setting history length see HISTSIZE and HISTFILESIZE in bash(1).
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=100000
 
 # Check the window size after each command and, if necessary, update the
 # values of LINES and COLUMNS.
@@ -124,6 +124,7 @@ fi
 ## Git.
 alias gp="git push origin HEAD"
 alias brclr="git branch | grep -Ev 'master|staging' | xargs -I{} git branch -D '{}'"
+alias brpre="git branch --show-current | xargs -d '_' -n 1 2>/dev/null | head -n 1"
 
 ## Unix magics
 alias ll="ls -alF"
@@ -140,6 +141,9 @@ alias ping="ping -c5"
 alias pkill="pkill -ecfi"
 alias update="sudo apt update && sudo apt upgrade && sudo apt autoclean && sudo apt autoremove"
 alias www="python3 -m http.server 8001"
+
+# Languages.
+PATH=$PATH:/usr/local/go/bin
 
 # Work.
 alias dj_dendi="curl -s https://raw.githubusercontent.com/rednafi/dotfiles/master/scripts/dj_dendi.sh | bash"
