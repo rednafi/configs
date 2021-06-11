@@ -9,7 +9,7 @@
 # Bash strict mode
 set -euo pipefail
 
-echo 'python celery' | xargs -n 1 sudo pkill -ecfi && \
+echo 'celery' | xargs -n 1 sudo pkill -ecfi && \
 docker stop dev-redis && \
 docker rm dev-redis && \
 docker run --name dev-redis -d -h localhost -p 6379:6379 redis:alpine
@@ -29,13 +29,6 @@ celery -A main worker -Q identifiers  -n identifiers --loglevel=INFO --concurren
 # Spawn the reports queue
 djq3="source .venv/bin/activate &&\
 celery -A main worker -Q reports -n reports --loglevel=INFO --concurrency=1"
-
-# # Spawn the bop orders queue
-# djq4="cd ../bulk_ordering_platform/ &&\
-# source .venv/bin/activate &&\
-# watchmedo auto-restart --directory=./ --pattern='*.py' \
-# --ignore-patterns='./.venv/*; ./*/migrations/*' --recursive -- \
-# celery -A main worker -Q orders -n orders --loglevel=INFO --concurrency=1"
 
 
 # Start all project's runners
