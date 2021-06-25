@@ -57,10 +57,12 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1="${debian_chroot:+($debian_chroot)}\[\033[00;33m\]\u@sekhmet\[\033[00m\]:\[\033[00;36m\]\w\[\033[00m\] \n$ "
+    PS1="${debian_chroot:+($debian_chroot)}\[\033[00;33m\]\u@\h\[\033[00m\]:\[\033[00;36m\]\w\[\033[00m\] \n$ "
+
 else
     PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w \n$ "
 fi
+
 
 # Save and reload the history after each command finishes. Also, add an empty line
 # after each command.
@@ -127,16 +129,12 @@ alias brclr="git branch | grep -Ev 'master|staging' | xargs -I{} git branch -D '
 alias brpre="git branch --show-current | xargs -d '_' -n 1 2>/dev/null | head -n 1"
 
 ## Unix magics
-alias ll="ls -alF"
-alias la="ls -A"
-alias l="ls -CF"
 alias sudo="sudo "
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -iv"
 alias hs="history|grep"
 alias ls="ls --group-directories-first --color=auto"
-alias pidof="pidof -xz"
 alias ping="ping -c5"
 alias pkill="pkill -ecfi"
 alias update="sudo apt update && sudo apt upgrade && sudo apt autoclean && sudo apt autoremove"
@@ -189,3 +187,4 @@ stop_rabbit() {
     command docker rm dev-rabbit
     echo
 }
+. "$HOME/.cargo/env"
