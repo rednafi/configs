@@ -55,11 +55,11 @@
     gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
     ```
 
-* Hide fat menubar.
+* Hide the fat Gnome titlebar.
 
-```
-gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
-```
+    ```
+    gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
+    ```
 
 ## ⚙️ Install Fonts
 
