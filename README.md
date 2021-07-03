@@ -41,13 +41,24 @@
     ```
     cp .bashrc ~/.bashrc
     ```
+* Overwrite `.bash_history`.
+    ```
+    cp .bash_history ~/.bash_history
+    ```
 
+## Gnome Settings
 
-## Ctrl+Tab & Ctrl+Shift+Tab to Switch Between Gnome Terminal Tabs
+* `Ctrl+Tab` & `Ctrl+Shift+Tab` to Switch Between Gnome Terminal Tabs.
+
+    ```
+    gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab' &&
+    gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
+    ```
+
+* Hide fat menubar.
 
 ```
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab' &&
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
+gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
 ```
 
 ## ⚙️ Install Fonts
@@ -88,6 +99,7 @@ This happens due to an obscure setting in IBus. To solve this:
 
 ## 🕹️ Basic Os Settings
 
-* Change window zoom via `gnome-tweaks` to 1.20.
+* Change window zoom via `gnome-tweaks` to 1.25.
 * Terminal font         : JetBrains Mono Regular
-* Terminal font size    : 17.5
+* System font           : FreeSans Regular
+* Terminal font size    : 18.5
