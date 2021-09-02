@@ -124,9 +124,18 @@ fi
 # Some more ls aliases.
 
 ## Git.
+
+# Git push origin.
 alias gp="git push origin HEAD"
-alias brclr="git branch | grep -Ev 'master|staging' | xargs -I{} git branch -D '{}'"
+
+# Clears all the branches other than the current branch, 'main', 'master' & 'staging'.
+alias brclr="git branch | grep -Ev 'main|master|staging' | xargs -I{} git branch -D '{}'"
+
+# Splits the name of the current branch by '_' and picks the first token.
 alias brpre="git branch --show-current | xargs -d '_' -n 1 2>/dev/null | head -n 1"
+
+# Opens all the files changed in the current branch.
+alias last_changed="git diff-tree --no-commit-id --name-only -r HEAD | xargs code"
 
 ## Unix magics
 alias sudo="sudo "
@@ -187,4 +196,7 @@ stop_rabbit() {
     command docker rm dev-rabbit
     echo
 }
-. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
